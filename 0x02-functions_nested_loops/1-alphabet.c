@@ -1,17 +1,9 @@
 #include "main.h"
 
-void print_alphabet(void);
-
 /**
- * main -  prints the alphabet, in lowercase
- * Return: 0
+ * print_alphabet -  prints the alphabet in lowercase
+ * Return : (void)
  */
-
-int main(void)
-{
-	print_alphabet();
-	return (0);
-}
 
 void print_alphabet(void)
 {
@@ -20,8 +12,8 @@ void print_alphabet(void)
 	x = 97;
 	while (x <= 122)
 	{
-		putchar(x);
+		_putchar(x);
 		x++;
 	}
-	putchar('\n');
+	_putchar('\n');
 }
