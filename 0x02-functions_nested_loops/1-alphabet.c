@@ -7,13 +7,13 @@
 
 void print_alphabet(void)
 {
-	char x;
+	char lowercase;
 
-	x = 97;
-	while (x <= 122)
+	lowercase = 97;
+	while (lowercase <= 122)
 	{
-		_putchar(x);
-		x++;
+		_putchar(lowercase);
+		lowercase++;
 	}
 	_putchar('\n');
 }
