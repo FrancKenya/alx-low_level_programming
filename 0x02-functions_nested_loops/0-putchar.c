@@ -1,11 +1,4 @@
-#ifndef MAIN_H
-#define MAIN_H
-
-#include <stdio.h>
-
-#endif /* MAIN_H */
-
-#include <main.h>
+#include "main.h"
 
 /**
  * main - Prints "_putchar" followed by a new line
