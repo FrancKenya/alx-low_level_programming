@@ -7,14 +7,15 @@
 
 int main(void)
 {
-	int y = 0;
+	int x, y = 0;
 
-	for (int x = 1; x < 1024; x++)
+	while (x < 1024)
 	{
-		if (x % 3 == 0 || x % 5 == 0)
+		if ((x % 3 == 0) || x % 5 == 0)
 		{
 			y = y + x;
 		}
+		x++;
 	}
 	printf("%d\n", y);
 	return (0);
