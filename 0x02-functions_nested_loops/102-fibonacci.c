@@ -7,28 +7,28 @@
 
 int main(void)
 {
-	int fib[n];
-	int i = 2;
+	int i = 3;
 
-	fib[0] = 1;
-	fib[1] = 2;
+	long int first = 1, second = 2;
+	long int next = first + second;
 
-	while (i < n)
+	printf("%lu,", first);
+	printf("%lu,", second);
+
+	while (i <= 50)
 	{
-		fib[i] = fib[i - 1] + fib[i - 2];
-		i++;
-	}
-	i = 0;
-
-	while (i < n)
-	{
-		printf("%d", fib[i]);
-		if (i != n - 1)
+		if (i == 50)
 		{
-			printf(", ");
+			printf("%lu \n", next);
 		}
+		else
+		{
+		       printf("%lu, ", next);
+		}
+		first =  second;
+		second = next;
+		next = first + second;
 		i++;
 	}
-	printf("\n");
-	return (0);
+		return (0);
 }
