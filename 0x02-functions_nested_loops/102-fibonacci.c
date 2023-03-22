@@ -7,12 +7,11 @@
 
 int main(void)
 {
-	int n = 50;
 	int fib[n];
+	int i = 2;
 
 	fib[0] = 1;
 	fib[1] = 2;
-	int i = 2;
 
 	while (i < n)
 	{
