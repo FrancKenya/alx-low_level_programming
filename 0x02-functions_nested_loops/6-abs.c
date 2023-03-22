@@ -1,4 +1,4 @@
-$include "main.h"
+#include "main.h"
 
 /**
  * _abs - computes the absolute value of an integer
@@ -7,12 +7,12 @@ $include "main.h"
  */
 int _abs(int x)
 {
-	if (n >= 0)
+	if (x >= 0)
 	{
 		return (x);
 	}
-	{
 	else
+	{
 		return (-x);
 	}
 }
