@@ -8,27 +8,17 @@
 
 int main(void)
 {
-	long int x = 612852475143;
-	long int y = 2;
+	long x,maxf;
+	long number =612852475143;
+	doube square = sqrt(number);
 
-	while (x % 2 == 0)
+	for (x = 1; x <= square; x++)
 	{
-		x /= 2;
-	}
-	long int z;
-
-	for (z = 3; z <= sqrt(x); z += 2)
-	{
-		while (x % z == 0)
+		if (number % x == 0)
 		{
-			y = z;
-			x /= z;
+			maxf = number / x;
 		}
 	}
-	if (x > 2)
-	{
-		y = x;
-	}
-	printf("%ld\n", y);
-	return (0);
+	printf("%ld\n", maxf);
+	return (0)
 }
