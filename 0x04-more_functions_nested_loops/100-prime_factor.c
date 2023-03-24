@@ -8,8 +8,8 @@
 
 int main(void)
 {
-	long x,maxf;
-	long number =612852475143;
+	long x, maxf;
+	long number = 612852475143;
 	doube square = sqrt(number);
 
 	for (x = 1; x <= square; x++)
@@ -20,5 +20,5 @@ int main(void)
 		}
 	}
 	printf("%ld\n", maxf);
-	return (0)
+	return (0);
 }
