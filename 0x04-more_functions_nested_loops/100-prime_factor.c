@@ -13,23 +13,28 @@ int main(void)
 
 	x = 612852475143;
 	factor = 2;
-	largest_factor = 0;
+	largest_factor = 2;
 
 	while (x > 1)
 	{
 		if (x % factor == 0)
 		{
 			x = x / factor;
+			if (factor > largest_factor)
+			{
+				largest_factor = factor;
+			}
 		}
-		else if (factor > largest_factor)
+		else if (factor > sqrt(x))
 		{
-			largest_factor = factor;
+				factor = x;
 		}
 		else
 		{
 			factor++;
 		}
 	}
+
 	printf("%ld\n", largest_factor);
 	return (0);
 }
