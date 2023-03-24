@@ -20,14 +20,14 @@ int main(void)
 		if (x % factor == 0)
 		{
 			x = x / factor;
-			if (factor > largest_factor)
-			{
-				largest_factor = factor;
-			}
+		}
+		else if (factor > largest_factor)
+		{
+			largest_factor = factor;
 		}
 		else if (factor > sqrt(x))
 		{
-				factor = x;
+			factor = x;
 		}
 		else
 		{
