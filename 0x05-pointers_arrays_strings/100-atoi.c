@@ -2,42 +2,44 @@
 
 /**
  * _atoi - converts a string to an integer
- * @s: string to be converted 
+ * @s: string to be converted
  * Return: the integer converted
  */
 
 int _atoi(char *s)
 {
-	int a, b, c, d, e, f;
+	int a, b, n, d, e, f;
 
 	a = 0;
-       	b = 0;
-       	n = 0;
-       	d = 0;
-       	e = 0;
-       	f = 0;
+	b = 0;
+	n = 0;
+	d = 0;
+	e = 0;
+	f = 0;
 	while (s[d] != '\0')
 	{
 		d++;
 	}
-	while (a < d && e == 0)
+	while (a < d && (a < e) == 0)
 	{
 		if (s[a] == '-')
 		{
-			++d;
+			++b;
 		}
 		if (s[a] >= '0' && s[a] <= '9')
 		{
 			f = s[a] - '0';
-		      if (b % 2)
-		      {
-			      f = -f;
-		      }
-		      n = n * 10 + f;
-		      e = 1;
-		      if (s[a + 1] < '0' || s[a + 1] > '9')
-			      break;
-		      e = 0;
+			if (b % 2)
+			{
+				f = -f;
+			}
+			n = n * 10 + f;
+			e = 1;
+			if (s[a + 1] < '0' || s[a + 1] > '9')
+			{
+				break;
+			}
+			e = 0;
 		}
 		a++;
 	}
