@@ -12,16 +12,16 @@ char *rot13(char *x)
 {
 	int i, j;
 
-	char data1[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmopqrstuvwxyz";
+	char data1[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char datarot[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	for (i = 0; x[i] != '\0'; i++)
 	{
 		for (j = 0; j < 52; j++)
 		{
-			if (x[i] == data1[i])
+			if (x[i] == data1[j])
 			{
-				x[i] = datarot[i];
+				x[i] = datarot[j];
 				break;
 			}
 		}
