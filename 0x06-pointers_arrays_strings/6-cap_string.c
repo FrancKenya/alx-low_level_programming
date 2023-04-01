@@ -2,21 +2,24 @@
 
 /**
  * *cap_string - function that capitalizes all words of a string
- * @str: The string being checked and changed
+ * @x: The string being checked and changed
  * Return: A changed string
  */
 
-char *cap_string(char *str)
+char *cap_string(char *x)
 {
 	int i;
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (i = 0; x[i] != '\0'; i++)
 	{
-		if ((i == 0 || str[i - 1] == ' ' || str[i - 1] == '\t' || str[i - 1] == '\n')
-				&& (str[i] >= 97 && str[i] <= 122))
+		if ((i == 0 || x[i - 1] == ' ' || x[i - 1] == '\t' || x[i - 1] == '\n'
+					|| x[i - 1] == ',' || x[i - 1] == ';' || x[i - 1] == '.' ||
+					x[i - 1] == '!' || x[i - 1] == '?' || x[i - 1] == '"' ||
+					x[i - 1] == '(' || x[i - 1] == ')' || x[i - 1] == '{' ||
+					x[i - 1] == '}') && (x[i] >= 'a' && x[i] <= 'z'))
 		{
-			str[i] = str[i] - 32;
+			x[i] = x[i] - 32;
 		}
 	}
-	return (str);
+	return (x);
 }
