@@ -11,9 +11,9 @@
 char *_memcpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int x; /* to iterate through memory area */
-	unsigned int y; /* to temporary holds the values of src */
+	unsigned char y; /* to temporary holds the values of src */
 
-	for (x = 0; x < n && src[x] != '\0'; x++)
+	for (x = 0; x < n; x++)
 	{
 		y = src[x]; /* y holds the values of src */
 		dest[x] = y;
