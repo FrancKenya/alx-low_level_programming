@@ -4,7 +4,7 @@
  * *_strstr - a function that locates a substring
  * @haystack: string being checked
  * @needle: substring with the first occurence being checked in haystack
- * Return: haystack  or NULL
+ * Return: haystack or NULL
  */
 
 char *_strstr(char *haystack, char *needle)
@@ -26,5 +26,5 @@ char *_strstr(char *haystack, char *needle)
 	}
 	h++;
 	}
-	return (NULL);
+	return (0);
 }
