@@ -23,14 +23,20 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		free(ptr);
 	s = malloc(new_size); /* allocate memory */
 
-	for (i = 0; i < old_size && i < new_size; i++)
+	if (new_size < old_size)
 	{
-		s[i] = ((char *) ptr)[i]; /* move the old_size to s */
+		for (i = 0; i < old_size && i < new_size; i++)
+		{
+			s[i] = ((char *) ptr)[i]; /* move the old_size to s */
+		}
 	}
-	while (i < new_size) /* new_size > old_size */
+	if (new_size > old_size)
 	{
-		s[i] = 0; /* don't initialize s */
-		i++;
+		while (i < old_size)
+		{
+			s[i] = 0; /* don't initialize */
+			i++;
+		}
 	}
 	free(ptr);
 	return (s);
