@@ -19,13 +19,13 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(1);
 	}
 	num_bytes = atoi(argv[1]);
 	if (num_bytes < 0)
 	{
 		printf("Error\n");
-		return (2);
+		exit(2);
 	}
 	main_code = (char *)main;
 	while (i < num_bytes)
@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 			printf("%02hhx\n", main_code[i]);
 			break;
 		}
-		printf("%02hhx", main_code[num_bytes - i - 1]);
+		printf("%02hhx", main_code[i]);
 		i++;
 	}
-	return (0);
+	exit(0);
 }
