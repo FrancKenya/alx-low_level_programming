@@ -13,9 +13,7 @@ int main(int argc, char *argv[])
 {
 	int num_bytes;
 
-	int (*main_ptr)(int, char **) = &main;
-	unsigned char *main_code = (unsigned char *)main_ptr;
-
+	char *main_code;
 	int i = 0;
 
 	if (argc != 2)
@@ -29,6 +27,7 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		return (2);
 	}
+	main_code = (char *)main;
 	while (i < num_bytes)
 	{
 		if (i == num_bytes - 1)
@@ -36,7 +35,7 @@ int main(int argc, char *argv[])
 			printf("%02hhx\n", main_code[i]);
 			break;
 		}
-		printf("%02hhx", main_code[i]);
+		printf("%02hhx", main_code[num_bytes - i - 1]);
 		i++;
 	}
 	return (0);
