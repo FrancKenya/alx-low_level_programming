@@ -14,6 +14,7 @@ list_t *add_node_end(list_t **head, const char *str)
 {
 	list_t *new_node, *j;
 	unsigned int len;
+	char *new_str;
 
 	if (str === NULL || head == NULL)
 	{
@@ -24,7 +25,13 @@ list_t *add_node_end(list_t **head, const char *str)
 	{
 		return (NULL);
 	}
-	new_node->str = strdup(str);
+	new_str = strdup(str);
+	if (new_str == NULL)
+	{
+		free(new_code);
+		return (NULL);
+	}
+	new_node->str = new_str;
 	new_node->len = len;
 	new_node->next = NULL;
 
@@ -40,4 +47,5 @@ list_t *add_node_end(list_t **head, const char *str)
 	}
 	j->next = new_node;
 	return (new_node);
-}
+}:wq
+
