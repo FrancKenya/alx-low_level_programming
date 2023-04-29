@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void __attribute__ ((constructor)) print_string(void);
+
 /**
 * print_string - prints two strings before main
 * Return: void
