@@ -25,10 +25,11 @@ list_t *add_node_end(list_t **head, const char *str)
 	{
 		return (NULL);
 	}
+	len = strlen(str);
 	new_str = strdup(str);
 	if (new_str == NULL)
 	{
-		free(new_code);
+		free(new_node);
 		return (NULL);
 	}
 	new_node->str = new_str;
