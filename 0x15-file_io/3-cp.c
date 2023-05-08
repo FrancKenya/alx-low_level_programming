@@ -31,12 +31,12 @@ int main(int argc, char *argv[])
 	f_from = open(argv[1], O_RDONLY);
 	if (f_from == -1)
 	{
-		print_error("Error: Can't read from file", argv[1], f_from);
+		print_error("Error: Can't read from file", argv[1], -1);
 		exit(98); }
 	f_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (f_to == -1)
 	{
-		print_error("Error: Can't write to", argv[2], f_to);
+		print_error("Error: Can't write to", argv[2], -1);
 		exit(99); }
 	while ((nread = read(f_from, buf, BUFSIZE)) > 0)
 	{
