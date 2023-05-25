@@ -1,20 +1,18 @@
-section .data
-format db "Hello, Holberton\n", 0
+section .dt
+	hello db "Hello, Holberton", 0
+	format db "%s", 10, 0 ; %s: string, 10: newline, 0: null terminator
+section .txt
+	extern printf
 
-section .text
 global main
-
-extern printf
-
 main:
-push rbp
-mov rbp, rsp
+	sub rsp, 8
+	mov rdi, format
+	mov rsi, hello
+	xor eax, eax
+	call printf
+	add rsp, 8
 
-mov rdi, format
-xor eax, eax
-call printf
-
-mov rsp, rbp
-pop rbp
-xor eax, eax
-ret
+	mov eax, 60  ; exit system call number
+	xor edi, edi ; exit status 0
+	syscall
