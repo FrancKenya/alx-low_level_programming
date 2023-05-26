@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 char *create_buf(char *file);
 void closing_file(int fd);
@@ -57,7 +58,7 @@ if (argc != 3)
 dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 exit(97);
 }
-buffer = create_buffer(argv[2]);
+buffer = create_buf(argv[2]);
 from = open(argv[1], O_RDONLY);
 r = read(from, buffer, 1024);
 to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
@@ -81,7 +82,7 @@ r = read(from, buffer, 1024);
 to = open(argv[2], O_WRONLY | O_APPEND);
 } while (r > 0);
 free(buffer);
-close_file(from);
-close_file(to);
+closing_file(from);
+closing_file(to);
 return (0);
 }
