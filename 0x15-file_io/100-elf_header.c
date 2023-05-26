@@ -24,32 +24,40 @@ void closing_elf(int elf);
 * @argv: argument vector*
 * Return: integer (0)success
 */
-int main(int __attribute__((__unused__)) argc, char *argv[])
+int main(int argc, char *argv[])
 {
-Elf64_Ehdr *header;
 int o, r;
+Elf64_Ehdr *header;
 
+if (argc != 2)
+{
+fprintf(stderr, "Usage: %s <ELF file>\n", argv[0]);
+return (1);
+}
 o = open(argv[1], O_RDONLY);
 if (o == -1)
 {
-dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-exit(98);
+fprintf(stderr, "Error: Can't read file %s\n", argv[1]);
+return (1);
 }
+
 header = malloc(sizeof(Elf64_Ehdr));
 if (header == NULL)
 {
 closing_elf(o);
-dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-exit(98);
+fprintf(stderr, "Error: Can't allocate memory\n");
+return (1);
 }
+
 r = read(o, header, sizeof(Elf64_Ehdr));
 if (r == -1)
 {
 free(header);
 closing_elf(o);
-dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
-exit(98);
+fprintf(stderr, "Error: Cannot read ELF header\n");
+return (1);
 }
+
 elf_checking(header->e_ident);
 printf("ELF Header:\n");
 print_mag(header->e_ident);
@@ -72,6 +80,7 @@ return (0);
 *
 * Description: Exit if not ELF
 */
+
 void elf_checking(unsigned char *e_ident)
 {
 int i;
