@@ -1,67 +1,81 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
 #include <fcntl.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <string.h>
+#include <stdio.h>
 
-#define BUFFER_SIZE 1024
+#define BUFSIZE 1024
+
 /**
-* errorExit - handles error in the main code
-* @message: pointer to message
-* @exitCode: integer argument
+* print_error - used to print standard errors
+* @filename: name of the file used
+* @fd: file descriptor
+* @msg: message
+* Return: void
 */
-
-void errorExit(const char *message, int exitCode)
-{
-dprintf(STDERR_FILENO, "%s\n", message);
-exit(exitCode);
-}
+void print_error(char *msg, char *filename, int fd);
 /**
-* main - function that copies the content of a file to another file
-* @argc: argument
+* main - fuction that is used to copy content
+* @argc: argument count
 * @argv: argument vector
-* Return: Success
+* Return: 0 (success)
 */
 
 int main(int argc, char *argv[])
 {
-const char *fileFrom, *fileTo;
-int fdFrom, fdTo;
-char buffer[BUFFER_SIZE];
-ssize_t bytesRead, bytesWritten;
+	int f_from, f_to, rt, nread;
+	char buf[BUFSIZE];
 
-if (argc != 3)
-errorExit("Usage: cp file_from file_to", 97);
-fileFrom = argv[1];
-fileTo = argv[2];
-fdFrom = open(fileFrom, O_RDONLY);
-if (fdFrom == -1)
-errorExit("Error: Can't read from file", 98);
-fdTo = open(fileTo, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP
-| S_IWGRP | S_IROTH);
-if (fdTo == -1)
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97); }
+	f_from = open(argv[1], O_RDONLY);
+	if (f_from == -1)
+	{
+		print_error("Error: Can't read from file", argv[1], -1);
+		exit(98); }
+	f_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (f_to == -1)
+	{
+		print_error("Error: Can't write to", argv[2], -1);
+		exit(99); }
+	while ((nread = read(f_from, buf, BUFSIZE)) > 0)
+	{
+		rt = write(f_to, buf, nread);
+		if (rt == -1)
+		{
+			print_error("Error: Can't write to", argv[2], f_to);
+			exit(99); }
+	}
+	if (nread == -1)
+	{
+		print_error("Error: Can't read from file", argv[1], f_from);
+		exit(98); }
+	rt = close(f_from);
+	if (rt == -1)
+	{
+		print_error("Error: Can't close fd", argv[1], f_from);
+		exit(100); }
+	rt = close(f_to);
+	if (rt == -1)
+	{
+		print_error("Error: Can't close fd", argv[2], f_to);
+		exit(100); }
+	return (0);
+	}
+/**
+* print_error - used to print standard errors
+* @filename: name of the file used
+* @fd: file descriptor
+* @msg: message
+* Return: void
+*/
+
+void print_error(char *msg, char *filename, int fd)
 {
-close(fdFrom);
-errorExit("Error: Can't write to file", 99); }
-while ((bytesRead = read(fdFrom, buffer, sizeof(buffer))) > 0)
-{
-bytesWritten = write(fdTo, buffer, bytesRead);
-if (bytesWritten == -1)
-{
-close(fdFrom);
-close(fdTo);
-errorExit("Error: Can't write to file", 99); }}
-if (bytesRead == -1)
-{
-close(fdFrom);
-close(fdTo);
-errorExit("Error: Can't read from file", 98);
-}
-if (close(fdFrom) == -1)
-errorExit("Error: Can't close fd", 100);
-if (close(fdTo) == -1)
-errorExit("Error: Can't close fd", 100);
-return (0);
+	dprintf(STDERR_FILENO, "%s %s", msg, filename);
+	if (fd != -1)
+	{
+		dprintf(STDERR_FILENO, " (fd=%d)", fd);
+	}
+	dprintf(STDERR_FILENO, "\n");
 }
