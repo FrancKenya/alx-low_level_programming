@@ -14,58 +14,8 @@ void print_mag(unsigned char *e_ident);
 void print_c(unsigned char *e_ident);
 void print_d(unsigned char *e_ident);
 void print_v(unsigned char *e_ident);
-void print_a(unsigned char *e_ident);
 void print_e(unsigned long int e_entry, unsigned char *e_ident);
 void closing_elf(int elf);
-
-/**
-* main - prints out info in the ELF.
-* @argc: argument count.
-* @argv: argument vector*
-* Return: integer (0)success
-*/
-int main(int __attribute__((__unused__)) argc, char *argv[])
-{
-Elf64_Ehdr *header;
-int o, r;
-
-o = open(argv[1], O_RDONLY);
-if (o == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-exit(98);
-}
-header = malloc(sizeof(Elf64_Ehdr));
-if (header == NULL)
-{
-closing_elf(o);
-dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-exit(98);
-}
-r = read(o, header, sizeof(Elf64_Ehdr));
-if (r == -1)
-{
-free(header);
-closing_elf(o);
-dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
-exit(98);
-}
-
-elf_checking(header->e_ident);
-printf("ELF Header:\n");
-print_mag(header->e_ident);
-print_c(header->e_ident);
-print_d(header->e_ident);
-print_v(header->e_ident);
-print_o(header->e_ident);
-print_a(header->e_ident);
-print_t(header->e_type, header->e_ident);
-print_e(header->e_entry, header->e_ident);
-
-free(header);
-closing_elf(o);
-return (0);
-}
 
 /**
 * elf_checking - Checking type of file.
@@ -301,4 +251,52 @@ dprintf(STDERR_FILENO,
 "Error: Can't close fd %d\n", elf);
 exit(98);
 }
+}
+/**
+* main - prints out info in the ELF.
+* @argc: argument count.
+* @argv: argument vector*
+* Return: integer (0)success
+*/
+int main(int __attribute__((__unused__)) argc, char *argv[])
+{
+Elf64_Ehdr *header;
+int o, r;
+
+o = open(argv[1], O_RDONLY);
+if (o == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+exit(98);
+}
+header = malloc(sizeof(Elf64_Ehdr));
+if (header == NULL)
+{
+closing_elf(o);
+dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+exit(98);
+}
+r = read(o, header, sizeof(Elf64_Ehdr));
+if (r == -1)
+{
+free(header);
+closing_elf(o);
+dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
+exit(98);
+}
+
+elf_checking(header->e_ident);
+printf("ELF Header:\n");
+print_mag(header->e_ident);
+print_c(header->e_ident);
+print_d(header->e_ident);
+print_v(header->e_ident);
+print_o(header->e_ident);
+print_a(header->e_ident);
+print_t(header->e_type, header->e_ident);
+print_e(header->e_entry, header->e_ident);
+
+free(header);
+closing_elf(o);
+return (0);
 }
