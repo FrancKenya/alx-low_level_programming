@@ -1,0 +1,20 @@
+# Makefile that creates an executable 'school'
+# It uses all, clean, oclean, fclean, re rules
+# It also uses CC, SRC, OBJ, NAME, RM variables
+# The all rule should recompile only the updated source files
+# The clean, oclean, fclean, re rules should never fail
+# Not allowed to have a list of all the .o files
+CC = gcc
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+RM = rm -rf
+
+all: $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+clean:
+	$(RM) *~ $(NAME)
+oclean:
+	$(RM) $(OBJ)
+fclean: clean oclean
+re: fclean all
