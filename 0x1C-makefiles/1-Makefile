@@ -1,5 +1,5 @@
 # makefile that uses all rule with variables to make an executable
-cc = gcc
-src = main.c school.c
+CC = gcc
+SRC = main.c school.c
 all:
-	$(cc) $(src) -o school
+	$(CC) $(SRC) -o school
