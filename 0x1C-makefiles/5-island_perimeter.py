@@ -13,7 +13,7 @@ def island_perimeter(grid):
     size = 0  # Initialize variable to count cells
     n_cells = 0  # Initialize variable to count cells with neighbor
     height = len(grid)   # height of the grid
-    width = len(grid[0])  # Width of the grid
+    width = len(grid[1])  # Width of the grid
 
     for h in range(height):
         for w in range(width):
