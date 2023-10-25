@@ -1,0 +1,3 @@
+# This is a make file that uses all rule to build an executable
+all:
+	gcc main.c school.c -o school
