@@ -1,7 +1,8 @@
 # include "search_algos.h"
 # include <stdio.h>
+
 /**
- * linear_search - A function that uses linear search algorithm to search
+ * linear_search - A C function that uses linear search algorithm to search
  * an array
  * @array: Pointer to the first element
  * @size: Number of elements in that array
