@@ -4,8 +4,7 @@
 
 /**
  * binary_search - A function that searches a value in an array
- using binary search
- 
+ * using binary search
  * @array: The array being searched
  * @size: Size of the array
  * @value: Value being searched
