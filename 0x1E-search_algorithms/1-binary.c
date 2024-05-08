@@ -1,9 +1,12 @@
 # include "search_algos.h"
 # include <stddef.h>
 # include <stdio.h>
+
 /**
- * binary_search - A function that searches a sorted array using binary search
- * @array: Array being searched
+ * binary_search - A function that searches a value in an array
+ using binary search
+ 
+ * @array: The array being searched
  * @size: Size of the array
  * @value: Value being searched
  * Return: Index of the value if present otherwise return -1 if array is NULL
